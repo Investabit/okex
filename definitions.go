@@ -311,7 +311,7 @@ func (t *JSONTime) UnmarshalJSON(s []byte) (err error) {
 	if err != nil {
 		return err
 	}
-	*(*time.Time)(t) = time.Unix(q/1000, ((q/1000)*1000)*int64(time.Millisecond)) // time.UnixMilli(q)
+	*(*time.Time)(t) = time.UnixMilli(q)
 	return
 }
 func (t *JSONFloat64) UnmarshalJSON(s []byte) (err error) {
