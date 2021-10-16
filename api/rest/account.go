@@ -25,13 +25,13 @@ func NewAccount(c *ClientRest) *Account {
 // Retrieve a list of assets (with non-zero balance), remaining balance, and available amount in the account.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-account-get-balance
-func (c *Account) GetBalance(req requests.GetBalance) (response responses.GetBalance, err error) {
+func (c *Account) GetBalance(req requests.GetBalance) (response responses.GetBalance, res *http.Response, err error) {
 	p := "/api/v5/account/balance"
 	m := okex.S2M(req)
 	if len(req.Ccy) > 0 {
 		m["ccy"] = strings.Join(req.Ccy, ",")
 	}
-	res, err := c.client.Do(http.MethodGet, p, true, m)
+	res, err = c.client.Do(http.MethodGet, p, true, m)
 	if err != nil {
 		return
 	}
