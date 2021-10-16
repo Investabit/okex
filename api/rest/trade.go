@@ -23,34 +23,17 @@ func NewTrade(c *ClientRest) *Trade {
 // PlaceOrder
 // You can place an order only if you have sufficient funds.
 //
-// https://www.okex.com/docs-v5/en/#rest-api-trade-get-positions
+// https://www.okex.com/docs-v5/en/#rest-api-trade-place-order
+// https://www.okex.com/docs-v5/en/#rest-api-trade-place-multiple-orders
 func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.PlaceOrder, err error) {
 	p := "/api/v5/trade/order"
 	var tmp interface{}
 	tmp = req[0]
 	if len(req) > 1 {
 		tmp = req
-		p = "/api/trade/batch-orders"
+		p = "/api/v5/trade/batch-orders"
 	}
 	m := okex.S2M(tmp)
-	res, err := c.client.Do(http.MethodPost, p, true, m)
-	if err != nil {
-		return
-	}
-	defer res.Body.Close()
-	d := json.NewDecoder(res.Body)
-	err = d.Decode(&response)
-
-	return
-}
-
-// PlaceMultipleOrders
-// Cancel an incomplete order.
-//
-// https://www.okex.com/docs-v5/en/#rest-api-trade-place-multiple-orders
-func (c *Trade) PlaceMultipleOrders(req []requests.PlaceOrder) (response responses.PlaceOrder, err error) {
-	p := "/api/v5/trade/batch-order"
-	m := okex.S2M(req)
 	res, err := c.client.Do(http.MethodPost, p, true, m)
 	if err != nil {
 		return
@@ -69,6 +52,7 @@ func (c *Trade) PlaceMultipleOrders(req []requests.PlaceOrder) (response respons
 //
 // Cancel incomplete orders in batches. Maximum 20 orders can be canceled at a time. Request parameters should be passed in the form of an array.
 //
+// https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-multiple-orders
 func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.PlaceOrder, err error) {
 	p := "/api/v5/trade/cancel-order"
@@ -76,7 +60,7 @@ func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.Pla
 	tmp = req[0]
 	if len(req) > 1 {
 		tmp = req
-		p = "/api/trade/cancel-batch-orders"
+		p = "/api/v5/trade/cancel-batch-orders"
 	}
 	m := okex.S2M(tmp)
 	res, err := c.client.Do(http.MethodPost, p, true, m)
@@ -96,6 +80,7 @@ func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.Pla
 //
 // Amend incomplete orders in batches. Maximum 20 orders can be amended at a time. Request parameters should be passed in the form of an array.
 //
+// https://www.okex.com/docs-v5/en/#rest-api-trade-amend-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-amend-multiple-orders
 func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendOrder, err error) {
 	p := "/api/v5/trade/amend-order"
@@ -103,7 +88,7 @@ func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendO
 	tmp = req[0]
 	if len(req) > 1 {
 		tmp = req
-		p = "/api/trade/amend-batch-orders"
+		p = "/api/v5/trade/amend-batch-orders"
 	}
 	m := okex.S2M(tmp)
 	res, err := c.client.Do(http.MethodPost, p, true, m)
@@ -177,7 +162,7 @@ func (c *Trade) GetOrderList(req requests.OrderList) (response responses.OrderLi
 func (c *Trade) GetOrderHistory(req requests.OrderList, arch bool) (response responses.OrderList, err error) {
 	p := "/api/v5/trade/orders-history"
 	if arch {
-		p = "/api/trade/orders-history-archive"
+		p = "/api/v5/trade/orders-history-archive"
 	}
 	m := okex.S2M(req)
 	res, err := c.client.Do(http.MethodGet, p, true, m)
@@ -201,7 +186,7 @@ func (c *Trade) GetOrderHistory(req requests.OrderList, arch bool) (response res
 func (c *Trade) GetTransactionDetails(req requests.TransactionDetails, arch bool) (response responses.TransactionDetail, err error) {
 	p := "/api/v5/trade/fills"
 	if arch {
-		p = "/api/trade/fills-history"
+		p = "/api/v5/trade/fills-history"
 	}
 	m := okex.S2M(req)
 	res, err := c.client.Do(http.MethodGet, p, true, m)
