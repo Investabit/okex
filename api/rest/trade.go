@@ -25,7 +25,7 @@ func NewTrade(c *ClientRest) *Trade {
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-place-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-place-multiple-orders
-func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.PlaceOrder, err error) {
+func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.PlaceOrder, res *http.Response, err error) {
 	p := "/api/v5/trade/order"
 	var tmp interface{}
 	tmp = req[0]
@@ -34,7 +34,7 @@ func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.Place
 		p = "/api/v5/trade/batch-orders"
 	}
 	m := okex.S2M(tmp)
-	res, err := c.client.Do(http.MethodPost, p, true, m)
+	res, err = c.client.Do(http.MethodPost, p, true, m)
 	if err != nil {
 		return
 	}
@@ -54,7 +54,7 @@ func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.Place
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-multiple-orders
-func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.PlaceOrder, err error) {
+func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.PlaceOrder, res *http.Response, err error) {
 	p := "/api/v5/trade/cancel-order"
 	var tmp interface{}
 	tmp = req[0]
@@ -63,7 +63,7 @@ func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.Pla
 		p = "/api/v5/trade/cancel-batch-orders"
 	}
 	m := okex.S2M(tmp)
-	res, err := c.client.Do(http.MethodPost, p, true, m)
+	res, err = c.client.Do(http.MethodPost, p, true, m)
 	if err != nil {
 		return
 	}
@@ -82,7 +82,7 @@ func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.Pla
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-amend-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-amend-multiple-orders
-func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendOrder, err error) {
+func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendOrder, res *http.Response, err error) {
 	p := "/api/v5/trade/amend-order"
 	var tmp interface{}
 	tmp = req[0]
@@ -91,7 +91,7 @@ func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendO
 		p = "/api/v5/trade/amend-batch-orders"
 	}
 	m := okex.S2M(tmp)
-	res, err := c.client.Do(http.MethodPost, p, true, m)
+	res, err = c.client.Do(http.MethodPost, p, true, m)
 	if err != nil {
 		return
 	}
@@ -122,10 +122,10 @@ func (c *Trade) ClosePosition(req requests.ClosePosition) (response responses.Cl
 // Retrieve order details.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-get-order-details
-func (c *Trade) GetOrderDetail(req requests.OrderList) (response responses.OrderList, err error) {
+func (c *Trade) GetOrderDetail(req requests.OrderList) (response responses.OrderList, res *http.Response, err error) {
 	p := "/api/v5/trade/order"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, true, m)
+	res, err = c.client.Do(http.MethodGet, p, true, m)
 	if err != nil {
 		return
 	}
@@ -139,10 +139,10 @@ func (c *Trade) GetOrderDetail(req requests.OrderList) (response responses.Order
 // Retrieve all incomplete orders under the current account.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-get-order-list
-func (c *Trade) GetOrderList(req requests.OrderList) (response responses.OrderList, err error) {
+func (c *Trade) GetOrderList(req requests.OrderList) (response responses.OrderList, res *http.Response, err error) {
 	p := "/api/v5/trade/orders-pending"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, true, m)
+	res, err = c.client.Do(http.MethodGet, p, true, m)
 	if err != nil {
 		return
 	}
@@ -159,13 +159,13 @@ func (c *Trade) GetOrderList(req requests.OrderList) (response responses.OrderLi
 //
 // Retrieve the completed order data of the last 3 months, and the incomplete orders that have been canceled are only reserved for 2 hours.
 // https://www.okex.com/docs-v5/en/#rest-api-trade-get-order-history-last-3-months
-func (c *Trade) GetOrderHistory(req requests.OrderList, arch bool) (response responses.OrderList, err error) {
+func (c *Trade) GetOrderHistory(req requests.OrderList, arch bool) (response responses.OrderList, res *http.Response, err error) {
 	p := "/api/v5/trade/orders-history"
 	if arch {
 		p = "/api/v5/trade/orders-history-archive"
 	}
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, true, m)
+	res, err = c.client.Do(http.MethodGet, p, true, m)
 	if err != nil {
 		return
 	}
@@ -183,13 +183,13 @@ func (c *Trade) GetOrderHistory(req requests.OrderList, arch bool) (response res
 // Retrieve recently-filled transaction details in the last 3 months.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-get-transaction-details-last-3-months
-func (c *Trade) GetTransactionDetails(req requests.TransactionDetails, arch bool) (response responses.TransactionDetail, err error) {
+func (c *Trade) GetTransactionDetails(req requests.TransactionDetails, arch bool) (response responses.TransactionDetail, res *http.Response, err error) {
 	p := "/api/v5/trade/fills"
 	if arch {
 		p = "/api/v5/trade/fills-history"
 	}
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, true, m)
+	res, err = c.client.Do(http.MethodGet, p, true, m)
 	if err != nil {
 		return
 	}
