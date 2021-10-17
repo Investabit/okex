@@ -32,6 +32,10 @@ type ClientRest struct {
 	client      *http.Client
 }
 
+func (c *ClientRest) SetHttpClient(client *http.Client) {
+	c.client = client
+}
+
 // NewClient returns a pointer to a fresh ClientRest
 func NewClient(apiKey, secretKey, passphrase string, baseURL okex.BaseURL, destination okex.Destination) *ClientRest {
 	c := &ClientRest{
