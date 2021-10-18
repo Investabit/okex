@@ -61,7 +61,7 @@ type (
 		OrdType     okex.OrderType      `json:"ordType"`
 		InstType    okex.InstrumentType `json:"instType"`
 		TgtCcy      okex.QuantityType   `json:"tgtCcy"`
-		UTime       int64               `json:"uTime"`
+		UTime       string              `json:"uTime"`
 		CTime       okex.JSONTime       `json:"cTime"`
 	}
 	TransactionDetail struct {
