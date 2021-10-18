@@ -39,10 +39,10 @@ type (
 		Category    string              `json:"category"`
 		FeeCcy      string              `json:"feeCcy"`
 		RebateCcy   string              `json:"rebateCcy"`
-		Px          okex.JSONFloat64    `json:"px"`
-		Sz          okex.JSONInt64      `json:"sz"`
+		Px          string              `json:"px"`
+		Sz          string              `json:"sz"`
 		Pnl         okex.JSONFloat64    `json:"pnl"`
-		AccFillSz   okex.JSONInt64      `json:"accFillSz"`
+		AccFillSz   string              `json:"accFillSz"`
 		FillPx      okex.JSONFloat64    `json:"fillPx"`
 		FillSz      okex.JSONInt64      `json:"fillSz"`
 		FillTime    okex.JSONFloat64    `json:"fillTime"`
@@ -61,7 +61,7 @@ type (
 		OrdType     okex.OrderType      `json:"ordType"`
 		InstType    okex.InstrumentType `json:"instType"`
 		TgtCcy      okex.QuantityType   `json:"tgtCcy"`
-		UTime       okex.JSONTime       `json:"uTime"`
+		UTime       int64               `json:"uTime"`
 		CTime       okex.JSONTime       `json:"cTime"`
 	}
 	TransactionDetail struct {
