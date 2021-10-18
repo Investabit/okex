@@ -54,7 +54,7 @@ func (c *Trade) PlaceOrder(req ...requests.PlaceOrder) (response responses.Place
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-cancel-multiple-orders
-func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.PlaceOrder, res *http.Response, err error) {
+func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.CancelOrder, res *http.Response, err error) {
 	p := "/api/v5/trade/cancel-order"
 	var tmp interface{}
 	tmp = req[0]
