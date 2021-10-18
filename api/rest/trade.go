@@ -82,7 +82,7 @@ func (c *Trade) CandleOrder(req ...requests.CancelOrder) (response responses.Can
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-amend-order
 // https://www.okex.com/docs-v5/en/#rest-api-trade-amend-multiple-orders
-func (c *Trade) AmendOrder(req ...requests.OrderList) (response responses.AmendOrder, res *http.Response, err error) {
+func (c *Trade) AmendOrder(req ...requests.AmendOrder) (response responses.AmendOrder, res *http.Response, err error) {
 	p := "/api/v5/trade/amend-order"
 	var tmp interface{}
 	tmp = req[0]
@@ -122,7 +122,7 @@ func (c *Trade) ClosePosition(req requests.ClosePosition) (response responses.Cl
 // Retrieve order details.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-trade-get-order-details
-func (c *Trade) GetOrderDetail(req requests.OrderList) (response responses.OrderList, res *http.Response, err error) {
+func (c *Trade) GetOrderDetail(req requests.OrderDetails) (response responses.OrderList, res *http.Response, err error) {
 	p := "/api/v5/trade/order"
 	m := okex.S2M(req)
 	res, err = c.client.Do(http.MethodGet, p, true, m)
