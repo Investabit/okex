@@ -15,7 +15,7 @@ type (
 		MgnRatio    okex.JSONFloat64  `json:"mgnRatio,omitempty"`
 		NotionalUsd okex.JSONFloat64  `json:"notionalUsd,omitempty"`
 		Details     []*BalanceDetails `json:"details,omitempty"`
-		UTime       okex.JSONTime     `json:"uTime"`
+		UTime       okex.JSONInt64    `json:"uTime"`
 	}
 	BalanceDetails struct {
 		Ccy           string           `json:"ccy"`
@@ -40,7 +40,7 @@ type (
 		NotionalLever okex.JSONFloat64 `json:"notionalLever,omitempty"`
 		StgyEq        okex.JSONFloat64 `json:"stgyEq"`
 		IsoUpl        okex.JSONFloat64 `json:"isoUpl,omitempty"`
-		UTime         okex.JSONTime    `json:"uTime"`
+		UTime         okex.JSONInt64   `json:"uTime"`
 	}
 	Position struct {
 		InstID      string              `json:"instId"`
