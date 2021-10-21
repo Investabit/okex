@@ -27,14 +27,14 @@ type (
 		ClOrdID string `json:"clOrdId,omitempty"`
 	}
 	AmendOrder struct {
-		ID        string  `json:"-"`
-		InstID    string  `json:"instId"`
-		OrdID     string  `json:"ordId,omitempty"`
-		ClOrdID   string  `json:"clOrdId,omitempty"`
-		ReqID     string  `json:"reqId,omitempty"`
-		NewSz     int64   `json:"newSz,omitempty,string"`
-		NewPx     float64 `json:"newPx,omitempty,string"`
-		CxlOnFail bool    `json:"cxlOnFail,omitempty"`
+		ID        string `json:"-"`
+		InstID    string `json:"instId"`
+		OrdID     string `json:"ordId,omitempty"`
+		ClOrdID   string `json:"clOrdId,omitempty"`
+		ReqID     string `json:"reqId,omitempty"`
+		NewSz     string `json:"newSz,omitempty"`
+		NewPx     string `json:"newPx,omitempty"`
+		CxlOnFail bool   `json:"cxlOnFail,omitempty"`
 	}
 	ClosePosition struct {
 		InstID  string            `json:"instId"`
