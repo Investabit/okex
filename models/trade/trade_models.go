@@ -44,7 +44,7 @@ type (
 		Pnl         okex.JSONFloat64    `json:"pnl"`
 		AccFillSz   string              `json:"accFillSz"`
 		FillPx      okex.JSONFloat64    `json:"fillPx"`
-		FillSz      okex.JSONInt64      `json:"fillSz"`
+		FillSz      okex.JSONFloat64    `json:"fillSz"`
 		FillTime    okex.JSONFloat64    `json:"fillTime"`
 		AvgPx       okex.JSONFloat64    `json:"avgPx"`
 		Lever       okex.JSONFloat64    `json:"lever"`
