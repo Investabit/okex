@@ -75,10 +75,10 @@ func (c *Market) GetIndexTickers(req requests.GetIndexTickers) (response respons
 // Retrieve a instrument is order book.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-market-data-get-order-book
-func (c *Market) GetOrderBook(req requests.GetOrderBook) (response responses.OrderBook, err error) {
+func (c *Market) GetOrderBook(req requests.GetOrderBook) (response responses.OrderBook, res *http.Response, err error) {
 	p := "/api/v5/market/books"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, false, m)
+	res, err = c.client.Do(http.MethodGet, p, false, m)
 	if err != nil {
 		return
 	}
