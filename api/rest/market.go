@@ -92,10 +92,10 @@ func (c *Market) GetOrderBook(req requests.GetOrderBook) (response responses.Ord
 // Retrieve the candlestick charts. This endpoint can retrieve the latest 1,440 data entries. Charts are returned in groups based on the requested bar.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-market-data-get-candlesticks
-func (c *Market) GetCandlesticks(req requests.GetCandlesticks) (response responses.Candle, err error) {
+func (c *Market) GetCandlesticks(req requests.GetCandlesticks) (response responses.Candle, res *http.Response, err error) {
 	p := "/api/v5/market/candles"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, false, m)
+	res, err = c.client.Do(http.MethodGet, p, false, m)
 	if err != nil {
 		return
 	}

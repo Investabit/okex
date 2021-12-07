@@ -24,10 +24,10 @@ func NewPublicData(c *ClientRest) *PublicData {
 // Retrieve a list of instruments with open contracts.
 //
 // https://www.okex.com/docs-v5/en/#rest-api-public-data-get-instruments
-func (c *PublicData) GetInstruments(req requests.GetInstruments) (response responses.GetInstruments, err error) {
+func (c *PublicData) GetInstruments(req requests.GetInstruments) (response responses.GetInstruments, res *http.Response, err error) {
 	p := "/api/v5/public/instruments"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodGet, p, false, m)
+	res, err = c.client.Do(http.MethodGet, p, false, m)
 	if err != nil {
 		return
 	}
